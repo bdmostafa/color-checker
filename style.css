@@ -9,6 +9,14 @@ header {
     font-weight: 700;
 }
 
+/* h1 {
+    font-family: 'gilbert-color-bold-preview5';
+} */
+
+span {
+    font-weight: 700;
+}
+
 .container-fluid {
     background-color: rgba(127, 255, 212, 0.445);
 }
@@ -29,8 +37,9 @@ header {
 
 .alert {
     margin-top: 6px;
-    font-size: 30px;
+    font-size: 45px;
     font-weight: 700;
+    transition: ease-out all .25s;
 }
 
 #game__section {
@@ -42,7 +51,7 @@ header {
 
 .rounded-circle {
     width: 30%;
-    /* background-color: #32cdb0; */
+    transition: ease-in-out all .5s;
     height: 10rem;
     float: left;
     margin: 1.5%;
