@@ -7,6 +7,8 @@ const easyBtn = document.getElementById('easy');
 const mediumBtn = document.getElementById('medium');
 const hardBtn = document.getElementById('hard');
 
+let numOfCircles = 6;
+
 let colors = generateRandomColor(6);
 
 let pickedRandomColor = pickRandomColor(colors);
@@ -14,11 +16,13 @@ displayColorCode.textContent = pickedRandomColor;
 
 resetBtn.addEventListener('click', function () {
     // generate new colors
-    colors = generateRandomColor(6);
+    colors = generateRandomColor(numOfCircles);
     // pick a color
     pickedRandomColor = pickRandomColor(colors);
     // display various message on this event
+    h1.style.color = 'black';
     displayColorCode.textContent = pickedRandomColor;
+    displayColorCode.style.color = 'black';
     alertMessage.textContent = '';
     this.textContent = "New Color";
     // display the generated color in the boxes
@@ -33,9 +37,12 @@ easyBtn.addEventListener('click', function () {
     hardBtn.classList.remove('selected');
 
     // Only 3 colors code generate
-    colors = generateRandomColor(3);
+    numOfCircles = 3
+    colors = generateRandomColor(numOfCircles);
     pickedRandomColor = pickRandomColor(colors);
+    h1.style.color = 'black';
     displayColorCode.textContent = pickedRandomColor;
+    displayColorCode.style.color = 'black';
     alertMessage.textContent = '';
     for (let i = 0; i < circles.length; i++) {
         // All display none at first then colors[i] displayed
@@ -53,9 +60,12 @@ mediumBtn.addEventListener('click', function () {
     hardBtn.classList.remove('selected');
 
     // Only 6 colors code generate
-    colors = generateRandomColor(6);
+    numOfCircles = 6
+    colors = generateRandomColor(numOfCircles);
     pickedRandomColor = pickRandomColor(colors);
+    h1.style.color = 'black';
     displayColorCode.textContent = pickedRandomColor;
+    displayColorCode.style.color = 'black';
     alertMessage.textContent = '';
     for (let i = 0; i < circles.length; i++) {
         circles[i].style.display = 'block';
@@ -74,9 +84,12 @@ hardBtn.addEventListener('click', function () {
     mediumBtn.classList.remove('selected');
 
     // Only 9 colors code generate
-    colors = generateRandomColor(9);
+    numOfCircles = 9
+    colors = generateRandomColor(numOfCircles);
     pickedRandomColor = pickRandomColor(colors);
+    h1.style.color = 'black';
     displayColorCode.textContent = pickedRandomColor;
+    displayColorCode.style.color = 'black';
     alertMessage.textContent = '';
     for (let i = 0; i < circles.length; i++) {
         circles[i].style.backgroundColor = colors[i];
@@ -90,6 +103,7 @@ for (let i = 0; i < circles.length; i++) {
     circles[i].addEventListener('click', function () {
         // Compare with pickedRandomColor
         let clickedColor = this.style.backgroundColor
+        console.log(clickedColor, pickedRandomColor)
         if (clickedColor === pickedRandomColor) {
             reset.textContent = "Play Again"
             h1.style.color = pickedRandomColor;
