@@ -6,6 +6,7 @@ body {
 
 header {
     justify-content: center;
+    font-weight: 700;
 }
 
 .container-fluid {
