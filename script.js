@@ -10,12 +10,26 @@ const hardBtn = document.getElementById('hard');
 
 let numOfCircles = 6;
 
-let colors = generateRandomColor(6);
+let colors = generateRandomColor(numOfCircles);
 
 let pickedRandomColor = pickRandomColor(colors);
 displayColorCode.textContent = pickedRandomColor;
 
 resetBtn.addEventListener('click', function () {
+    reset();
+    this.textContent = "New Color";
+    // display the generated color in the boxes
+    for (let i = 0; i < circles.length; i++) {
+        circles[i].style.backgroundColor = colors[i];
+    }
+})
+
+function initialize() {
+
+}
+initialize()
+
+function reset() {
     // generate new colors
     colors = generateRandomColor(numOfCircles);
     // pick a color
@@ -25,14 +39,11 @@ resetBtn.addEventListener('click', function () {
     displayColorCode.textContent = pickedRandomColor;
     displayColorCode.style.color = 'black';
     alertMessage.textContent = '';
-    this.textContent = "New Color";
-    // display the generated color in the boxes
-    for (let i = 0; i < circles.length; i++) {
-        circles[i].style.backgroundColor = colors[i];
-    }
-})
+    resetBtn.textContent = 'New Color';
+}
 
-function modeChange(numOfCircles) {
+
+function modeChange() {
     for (let i = 0; i < modeBtn.length; i++) {
         modeBtn[i].addEventListener('click', function () {
             // At first all selected item removed
@@ -41,21 +52,11 @@ function modeChange(numOfCircles) {
             hardBtn.classList.remove('selected');
             this.classList.add('selected');
 
+            // Checking the button which one is click and 
+            numOfCircles = (this.textContent === 'Easy') ? 3 : (this.textContent === 'Medium') ? 6 : 9
 
-            // Checking the button which one is click
-            if (this.textContent === 'Easy') {
-                numOfCircles = 3
-            } else if (this.textContent === 'Medium') {
-                numOfCircles = 6
-            } else {
-                numOfCircles = 9
-            }
-            colors = generateRandomColor(numOfCircles);
-            pickedRandomColor = pickRandomColor(colors);
-            h1.style.color = 'black';
-            displayColorCode.textContent = pickedRandomColor;
-            displayColorCode.style.color = 'black';
-            alertMessage.textContent = '';
+            reset();
+
             for (let i = 0; i < circles.length; i++) {
                 // All display none at first then colors[i] displayed
                 if (colors[i]) {
@@ -75,68 +76,21 @@ easyBtn.addEventListener('click', function () {
     this.classList.add('selected');
     mediumBtn.classList.remove('selected');
     hardBtn.classList.remove('selected');
-
-    // Only 3 colors code generate
     modeChange();
-    // colors = generateRandomColor(numOfCircles);
-    // pickedRandomColor = pickRandomColor(colors);
-    // h1.style.color = 'black';
-    // displayColorCode.textContent = pickedRandomColor;
-    // displayColorCode.style.color = 'black';
-    // alertMessage.textContent = '';
-    // for (let i = 0; i < circles.length; i++) {
-    //     // All display none at first then colors[i] displayed
-    //     if (colors[i]) {
-    //         circles[i].style.backgroundColor = colors[i];
-    //     } else {
-    //         circles[i].style.display = 'none';
-    //     }
-    // }
 })
 
 mediumBtn.addEventListener('click', function () {
     this.classList.add('selected');
     easyBtn.classList.remove('selected');
     hardBtn.classList.remove('selected');
-
-    // Only 6 colors code generate
-
     modeChange();
-    // colors = generateRandomColor(numOfCircles);
-    // pickedRandomColor = pickRandomColor(colors);
-    // h1.style.color = 'black';
-    // displayColorCode.textContent = pickedRandomColor;
-    // displayColorCode.style.color = 'black';
-    // alertMessage.textContent = '';
-    // for (let i = 0; i < circles.length; i++) {
-    //     circles[i].style.display = 'block';
-    //     // All display none at first then colors[i] displayed
-    //     if (colors[i]) {
-    //         circles[i].style.backgroundColor = colors[i];
-    //     } else {
-    //         circles[i].style.display = 'none';
-    //     }
-    // }
 })
 
 hardBtn.addEventListener('click', function () {
     this.classList.add('selected');
     easyBtn.classList.remove('selected');
     mediumBtn.classList.remove('selected');
-
-    // Only 9 colors code generate
-    numOfCircles = 9
-    colors = generateRandomColor(numOfCircles);
-    pickedRandomColor = pickRandomColor(colors);
-    h1.style.color = 'black';
-    displayColorCode.textContent = pickedRandomColor;
-    displayColorCode.style.color = 'black';
-    alertMessage.textContent = '';
-    for (let i = 0; i < circles.length; i++) {
-        circles[i].style.backgroundColor = colors[i];
-        // Remove display none mode that was on easy mode
-        circles[i].style.display = 'block';
-    }
+    modeChange();
 })
 
 for (let i = 0; i < circles.length; i++) {
@@ -144,12 +98,11 @@ for (let i = 0; i < circles.length; i++) {
     circles[i].addEventListener('click', function () {
         // Compare with pickedRandomColor
         let clickedColor = this.style.backgroundColor
-        console.log(clickedColor, pickedRandomColor)
         if (clickedColor === pickedRandomColor) {
-            reset.textContent = "Play Again"
             h1.style.color = pickedRandomColor;
             displayColorCode.style.color = pickedRandomColor;
             alertMessage.textContent = "You are Correct!"
+            resetBtn.textContent = "Play Again"
             alertMessage.style.color = pickedRandomColor
             matchWithRandomColor(pickedRandomColor)
         } else {
