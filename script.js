@@ -3,6 +3,7 @@ const displayColorCode = document.getElementById('displayColorCode');
 const h1 = document.querySelector('h1');
 const alertMessage = document.querySelector('.alert');
 const resetBtn = document.getElementById('reset');
+const modeBtn = document.querySelectorAll('.mode');
 const easyBtn = document.getElementById('easy');
 const mediumBtn = document.getElementById('medium');
 const hardBtn = document.getElementById('hard');
@@ -31,27 +32,66 @@ resetBtn.addEventListener('click', function () {
     }
 })
 
+function modeChange(numOfCircles) {
+    for (let i = 0; i < modeBtn.length; i++) {
+        modeBtn[i].addEventListener('click', function () {
+            // At first all selected item removed
+            easyBtn.classList.remove('selected');
+            mediumBtn.classList.remove('selected');
+            hardBtn.classList.remove('selected');
+            this.classList.add('selected');
+
+
+            // Checking the button which one is click
+            if (this.textContent === 'Easy') {
+                numOfCircles = 3
+            } else if (this.textContent === 'Medium') {
+                numOfCircles = 6
+            } else {
+                numOfCircles = 9
+            }
+            colors = generateRandomColor(numOfCircles);
+            pickedRandomColor = pickRandomColor(colors);
+            h1.style.color = 'black';
+            displayColorCode.textContent = pickedRandomColor;
+            displayColorCode.style.color = 'black';
+            alertMessage.textContent = '';
+            for (let i = 0; i < circles.length; i++) {
+                // All display none at first then colors[i] displayed
+                if (colors[i]) {
+                    circles[i].style.display = 'block';
+                    circles[i].style.backgroundColor = colors[i];
+                } else {
+                    circles[i].style.display = 'none';
+                }
+            }
+        })
+    }
+}
+
+
+
 easyBtn.addEventListener('click', function () {
     this.classList.add('selected');
     mediumBtn.classList.remove('selected');
     hardBtn.classList.remove('selected');
 
     // Only 3 colors code generate
-    numOfCircles = 3
-    colors = generateRandomColor(numOfCircles);
-    pickedRandomColor = pickRandomColor(colors);
-    h1.style.color = 'black';
-    displayColorCode.textContent = pickedRandomColor;
-    displayColorCode.style.color = 'black';
-    alertMessage.textContent = '';
-    for (let i = 0; i < circles.length; i++) {
-        // All display none at first then colors[i] displayed
-        if (colors[i]) {
-            circles[i].style.backgroundColor = colors[i];
-        } else {
-            circles[i].style.display = 'none';
-        }
-    }
+    modeChange();
+    // colors = generateRandomColor(numOfCircles);
+    // pickedRandomColor = pickRandomColor(colors);
+    // h1.style.color = 'black';
+    // displayColorCode.textContent = pickedRandomColor;
+    // displayColorCode.style.color = 'black';
+    // alertMessage.textContent = '';
+    // for (let i = 0; i < circles.length; i++) {
+    //     // All display none at first then colors[i] displayed
+    //     if (colors[i]) {
+    //         circles[i].style.backgroundColor = colors[i];
+    //     } else {
+    //         circles[i].style.display = 'none';
+    //     }
+    // }
 })
 
 mediumBtn.addEventListener('click', function () {
@@ -60,22 +100,23 @@ mediumBtn.addEventListener('click', function () {
     hardBtn.classList.remove('selected');
 
     // Only 6 colors code generate
-    numOfCircles = 6
-    colors = generateRandomColor(numOfCircles);
-    pickedRandomColor = pickRandomColor(colors);
-    h1.style.color = 'black';
-    displayColorCode.textContent = pickedRandomColor;
-    displayColorCode.style.color = 'black';
-    alertMessage.textContent = '';
-    for (let i = 0; i < circles.length; i++) {
-        circles[i].style.display = 'block';
-        // All display none at first then colors[i] displayed
-        if (colors[i]) {
-            circles[i].style.backgroundColor = colors[i];
-        } else {
-            circles[i].style.display = 'none';
-        }
-    }
+
+    modeChange();
+    // colors = generateRandomColor(numOfCircles);
+    // pickedRandomColor = pickRandomColor(colors);
+    // h1.style.color = 'black';
+    // displayColorCode.textContent = pickedRandomColor;
+    // displayColorCode.style.color = 'black';
+    // alertMessage.textContent = '';
+    // for (let i = 0; i < circles.length; i++) {
+    //     circles[i].style.display = 'block';
+    //     // All display none at first then colors[i] displayed
+    //     if (colors[i]) {
+    //         circles[i].style.backgroundColor = colors[i];
+    //     } else {
+    //         circles[i].style.display = 'none';
+    //     }
+    // }
 })
 
 hardBtn.addEventListener('click', function () {
