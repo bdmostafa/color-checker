@@ -4,6 +4,10 @@ body {
     text-align: center;
 }
 
+header {
+    justify-content: center;
+}
+
 .container-fluid {
     background-color: rgba(127, 255, 212, 0.445);
 }
@@ -22,6 +26,12 @@ body {
     font-size: larger;
 }
 
+.alert {
+    margin-top: 6px;
+    font-size: 30px;
+    font-weight: 700;
+}
+
 #game__section {
     margin-top: 25px;
     background-color: darkslategrey;
@@ -31,7 +41,7 @@ body {
 
 .rounded-circle {
     width: 30%;
-    background-color: #32cdb0;
+    /* background-color: #32cdb0; */
     height: 10rem;
     float: left;
     margin: 1.5%;
